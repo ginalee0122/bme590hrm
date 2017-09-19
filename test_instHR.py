@@ -1,7 +1,5 @@
 import sys, os, string
 import instHR
-from instHR import getPeaks
-from instHR import instHR
 
 
 def test_getPeaks():
