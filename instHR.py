@@ -7,8 +7,6 @@ def getPeaks(vs, ts, threshV=1):
     one containing the voltage peaks, and one with their respective time points."""
     # PeakVs = []
     PeakTs = []
-    # inV = 0
-    # inT = 0
     threshPassedBool = False
 
     for i in range(0,len(vs)):
@@ -27,6 +25,8 @@ def getPeaks(vs, ts, threshV=1):
 def instHR(pTs, instT=1):
     if instT < 1:
         instT = 1
+    if instT > len(pTs):
+        instT = len(pTs)-1
     # compute instantaneous BPM using previous time and current time
     timeDiff = pTs[instT] - pTs[instT-1]
     return 60.0/timeDiff
@@ -37,6 +37,6 @@ if __name__ == '__main__':
     mV = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
     time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     PeakTs = getPeaks(mV, time, 2)
-    print(PeakVs)
     print(PeakTs)
+    print(instHR([1,2,3,4,5],7))
     print(instHR(PeakTs,1))
