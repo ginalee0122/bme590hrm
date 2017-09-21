@@ -12,8 +12,8 @@ def test_getPeaks():
     time2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     assert getPeaks(mV2, time2, threshV) == [3, 6, 11]
     mV3 = [0, 1, 2, 4, 0, 1, 2.5, 3.1, 0, 1, 2, 3]
-    time3 = [0, 2, 4, 6, 8, 9, 10, 11, 12, 13]
-    assert getPeaks(mV3, time3, threshV) == [6, 10, 13]
+    time3 = [0, 2, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15]
+    assert getPeaks(mV3, time3, threshV) == [6, 10, 15]
 
 
 def test_instHR():
