@@ -25,7 +25,7 @@ def getPeaks(vs, ts, threshV=1):
 def instHR(pTs, instT=1):
     if instT < 1:
         instT = 1
-    if instT > len(pTs):
+    if instT >= len(pTs):
         instT = len(pTs)-1
     # compute instantaneous BPM using previous time and current time
     timeDiff = pTs[instT] - pTs[instT-1]
@@ -38,5 +38,5 @@ if __name__ == '__main__':
     time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     PeakTs = getPeaks(mV, time, 2)
     print(PeakTs)
-    print(instHR([1,2,3,4,5],7))
-    print(instHR(PeakTs,1))
+    print(instHR([6, 10, 13], 3))
+    print(instHR(PeakTs, 1))
