@@ -20,7 +20,7 @@ def test_instHR():
     """This test will check for properly working instantaneous heart rate detection."""
     pTs = [6, 10, 13]
     assert instHR(pTs, 0) == 15
-    assert instHR(pTs, 3) == 20
+    assert instHR(pTs, 13) == 20
     pTs2 = [1, 2, 3, 4, 5]
     assert instHR(pTs2, -2) == 60
-    assert instHR(pTs2, 4) == 60
+    assert instHR(pTs2, 6) == 60
