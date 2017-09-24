@@ -23,10 +23,14 @@ def getPeaks(vs, ts, threshV=1):
 
 
 def instHR(pTs, instT=0):
-    """This function takes in a time array of PEAKS (output from getPeaks) and
-    the desired instantaneous timepoint. If the timepoint lies between two peaks,
-    the time difference between the two peaks will be calculated. This time
-    difference represents the bpm once divided by 60."""
+    """This function takes in a time array of PEAKS (len>1; output from getPeaks) and
+    the desired instantaneous timepoint. If the timepoint lies between two peaks, the
+    time difference between the two peaks will be calculated. This time difference
+    represents the bpm once divided by 60."""
+
+    if len(pTs) < 2:
+        print("ERROR: Input must have more than one peak!")
+        return 0
 
     prevT = pTs[0]
     if instT < pTs[1]:  # set index to second peak if before the second time point
