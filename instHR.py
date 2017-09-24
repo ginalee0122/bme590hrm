@@ -3,9 +3,9 @@ import sys, os, string
 
 
 def getPeaks(vs, ts, threshV=1):
-    """This function loops through lists of Voltage and Time and returns two arrays,
-    one containing the voltage peaks, and one with their respective time points."""
-    # PeakVs = []
+    """This function loops through lists of Voltage and Time and returns one array
+    containing the voltage peaks, and one with their respective time points."""
+
     PeakTs = []
     threshPassedBool = False
 
@@ -23,12 +23,26 @@ def getPeaks(vs, ts, threshV=1):
 
 
 def instHR(pTs, instT=1):
-    if instT < 1:
-        instT = 1
-    if instT >= len(pTs):
-        instT = len(pTs)-1
+    """This function takes in a time array of PEAKS (output from getPeaks) and
+    the desired instantaneous timepoint. If the timepoint lies between two peaks,
+    the time difference between the two peaks will be calculated. This time
+    difference represents the bpm once divided by 60."""
+    prevT = pTs[0]
+    if instT < pTs[1]:  # set index to second peak if before the second time point
+        instT = pTs[1]
+    elif instT >= pTs[len(pTs)-1]:  # set index to last peak if after the last time point
+        instT = pTs[len(pTs)-1]
+        prevT = pTs[len(pTs)-2]
+    else:
+        lastT = pTs[0]
+        for peakT in pTs:
+            if instT <= peakT and instT > lastT:
+                instT = peakT
+                prevT = lastT
+            else:
+                lastT = peakT
     # compute instantaneous BPM using previous time and current time
-    timeDiff = pTs[instT] - pTs[instT-1]
+    timeDiff = instT - prevT
     return 60.0/timeDiff
 
 
@@ -39,4 +53,4 @@ if __name__ == '__main__':
     PeakTs = getPeaks(mV, time, 2)
     print(PeakTs)
     print(instHR([6, 10, 13], 3))
-    print(instHR(PeakTs, 1))
+    print(instHR(PeakTs, 11))
