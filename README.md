@@ -10,4 +10,5 @@ When the file is ran, it will ask the user to input information for 6 items:
 - starttime (for calculating the average)
 - endtime (for calculating the average)
 - instant timepoint (for calculating the instantaneous heart rate)
+
 Because there are default values assigned to each of the 6 items, even if the user fails to input a value all of the values - instantaneous heart rate, average heart rate, and the detection of brady/tachy-cardia - will be outputted to the output file.
