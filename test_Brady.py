@@ -1,7 +1,7 @@
 
 from checkbrady import checkbrady
 
-def test_Brady():
+def test_checkbrady():
 
     ''' Test CheckBrady with different HR conditions
     1 is Tachy 2 is Brady 3 is healthy'''
