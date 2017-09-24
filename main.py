@@ -14,11 +14,8 @@ def readFile(directory):
     data = csv.reader(f)
     next(data)
     for line in data:  
-        #print(line)
         time.append(float(line[0]))
         mV.append(float(line[1]))
-    #print(time)
-    #print(mV)
     f.close()
         
 def getAverage(mV, time, starttime, endtime, threshold):
