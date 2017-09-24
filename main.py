@@ -1,4 +1,6 @@
-import csv, pytest
+import csv, pytest, sys
+from instHR import*
+from checkbrady import*
 
 #import checkbrady #Blake's function
 
@@ -28,19 +30,36 @@ def getAverage(mV, time, starttime, endtime, threshold):
         if val == endtime:
             endidx = idx
     for voltage in mV[startidx:endidx+1]:
-        if voltage >= threshold and flag == 0:
+        if voltage > threshold and flag == 0:
             count += 1
             flag = 1
         if voltage < threshold:
             flag = 0
     print(count)
     averageHR = count/(endtime-starttime)
-    return averageHR
+    return averageHR*60
 
+def writeFile(directory, instHR, avgHR, BCnum):
+    f = open(directory,"w")
+    f.write("Estimated instantaneous heart rate: "+str(instHR)+"\n")
+    f.write("Estimated average heart rate: "+str(avgHR)+"\n")
+    if (BCnum == 1):
+        f.write("There is tachycardia detected")
+    elif (BCnum == 2):
+        f.write("There is bradycardia detected")
+    else:
+        f.write("ECG does not have any detection of tachy/brady-cardia")
+    f.close()
 
 if __name__ == "__main__":
-    readFile('/Users/sylee/bme590hrm/testdata.csv')
+    test_filename = str(sys.argv[1])
+    readFile(test_filename)
+    out_filename = str(sys.argv[2])
     threshold = float(input("Enter threshold: ") or '2')
     starttime = float(input("Enter start time for average calculation: ") or time[0])
     endtime = float(input("Enter end time for average calculation: ") or time[len(time)-1])
-    print(getAverage(mV, time, starttime, endtime, threshold))
+    instant_timepoint = float(input("Enter the specific time point for instantaneous heart rate: ") or time[0])
+    instHR = instHR(getPeaks(mV, time, threshold), instant_timepoint)
+    avgHR = getAverage(mV, time, starttime, endtime, threshold)
+    BCnum = checkbrady(avgHR) 
+    writeFile(out_filename, instHR, avgHR, BCnum) 
