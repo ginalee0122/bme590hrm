@@ -1,5 +1,4 @@
 import sys, os, string
-# from bme590_main import readFile
 
 
 def getPeaks(vs, ts, threshV=1):
