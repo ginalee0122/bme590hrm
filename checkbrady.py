@@ -3,7 +3,7 @@ def checkbrady(heartrate, threshold1=100, threshold2=60):
        if the heart rate is above 100, tachycardia is detected. If the heart
        rate is below 60, bradycardia is detected. """
 
-    if heartrate > threshol1d1:
+    if heartrate > threshold1:
         print('There is tachycardia detected')
         return 1
     elif heartrate < threshold2:
